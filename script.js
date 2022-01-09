@@ -1,12 +1,7 @@
 let gameData = [];
 const gridDiv= document.querySelector('#grid');
 let boxList=gridDiv.querySelectorAll(".quadrants");
-//Display data updates the grid layout when called
-function displayData(gameData,gridBlockIndex){
-    let nodeQ= gridDiv.querySelector(`#${boxList[gridBlockIndex].id}`);
-    nodeQ.innerHTML=`${gameData[gridBlockIndex]}`;
-}
-
+//event listeners
 gridDiv.addEventListener('click',function(e){
     let clickId=e.path[0].id;
     let boxNumber=0;
@@ -16,13 +11,29 @@ gridDiv.addEventListener('click',function(e){
     console.log(clickIndex);
     gameData[clickIndex]='O';
     console.log(gameData);
-    displayData(gameData,clickIndex);
+    ticTacToe.displayData(gameData,clickIndex);
 });
 
+//factory functions
+const Player = (name,symbol) =>{
+    return {name,symbol};
+}
+//trying to use modules to store all functions
+const ticTacToe=(()=>{
+    //Display data updates the grid layout when called
+    const displayData = (gameData,gridBlockIndex) =>{
+        let nodeQ= gridDiv.querySelector(`#${boxList[gridBlockIndex].id}`);
+        nodeQ.innerHTML=`${gameData[gridBlockIndex]}`;  
+    }
+    return {displayData}
+})();
+const player1= Player('george','X');
+const player2= Player('jeff','O');
 //Displays random numbers in the grid
 // setInterval(function(){    
 //     for(let i=0;i<gameData.length;i++){
 //         gameData[i]=Math.floor(Math.random()*100);
+//         displayData(gameData,i);
 //     }
-//     displayData(gameData);
-// },1000);
+    
+// },200);
