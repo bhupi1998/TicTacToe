@@ -45,12 +45,13 @@ const ticTacToe=(()=>{
         let columns=[[0,3,6],[1,4,7],[2,5,8]];
         let rows=[[0,1,2],[3,4,5],[6,7,8]];
         let diagonals=[[0,4,8],[2,4,6]];
+        let testArray=[1,1,1,1,1];
 
-        const comparator =(valTocompare,current) =>valTocompare===current & current != undefined;
+        const comparator =(current) =>prev===current & current != undefined;
         //check rows
         for(let horiz=0;horiz<3;horiz++){
             prev=gameData[rows[horiz][0]];
-            console.log(rows[0].every(comparator(prev,curr),curr));
+            console.log(rows[horiz].every(comparator));
                if(win>=2){
                     winForReal=1;
                     console.log("horiz win by "+ curr);
