@@ -4,6 +4,21 @@ const Player = (name,symbol) =>{
     return {name,symbol};
 }
 
+const gameArrays=(gameData) => {
+    let columns=[[0,3,6],[1,4,7],[2,5,8]];
+    let rows=[[0,1,2],[3,4,5],[6,7,8]];
+    let diagonals=[[0,4,8],[2,4,6]];
+    const arrayDataConverter = () =>{
+    for(let i=0;i<3;i++){
+        for(let l=0;l<3;l++){
+            if(rows[i][l]!=undefined)
+                rows[i][l]=gameData[rows[i][l]];
+        }
+    }
+    console.log({rows,columns,diagonals});
+}
+    return {columns,rows,diagonals,arrayDataConverter}
+}
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
     let gameData = [];
@@ -13,6 +28,7 @@ const ticTacToe=(()=>{
     //declaring these here. not sure if good idea just yet. Trying to get this working first
     const player1= Player('george','X');
     const player2= Player('jeff','O');
+    const sortedGameData= gameArrays(gameData);
     const gridDiv= document.querySelector('#grid');
     let boxList=gridDiv.querySelectorAll(".quadrants");
     //event listeners
@@ -42,23 +58,22 @@ const ticTacToe=(()=>{
         let curr=0;
         let win=0;
         let winForReal=0;
-        let columns=[[0,3,6],[1,4,7],[2,5,8]];
-        let rows=[[0,1,2],[3,4,5],[6,7,8]];
-        let diagonals=[[0,4,8],[2,4,6]];
-        let testArray=[1,1,1,1,1];
+
 
         const comparator =(current) =>prev===current & current != undefined;
         //check rows
-        for(let horiz=0;horiz<3;horiz++){
-            prev=gameData[rows[horiz][0]];
-            console.log(rows[horiz].every(comparator));
-               if(win>=2){
-                    winForReal=1;
-                    console.log("horiz win by "+ curr);
-                    break;
-               }
-            win=0;//reset
-        }
+        sortedGameData.arrayDataConverter();
+        // for(let horiz=0;horiz<3;horiz++){
+        //     prev=gameData[rows[horiz][0]];
+        //     // console.log(rows[horiz].every(comparator)); //this makes no sense.. Rows contains points and not the actual contents of gameData.
+            
+        //        if(win>=2){
+        //             winForReal=1;
+        //             console.log("horiz win by "+ curr);
+        //             break;
+        //        }
+        //     win=0;//reset
+        // }
 
         // //check columns
         // prev=0;
