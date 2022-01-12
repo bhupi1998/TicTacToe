@@ -38,12 +38,27 @@ const ticTacToe=(()=>{
     }
 
     const winChecker =(gameData) => {
+        let prev=0;
+        let curr=0;
+        let win=0;
         let columns=[[0,3,6],[1,4,7],[2,5,8]];
         let rows=[[0,1,2],[3,4,5],[6,7,8]];
         let diagonals=[[0,4,8][2,4,6]];
         //check rows
-        for(let horiz=0;horiz<2;horiz++){
-
+        for(let horiz=0;horiz<3;horiz++){
+            prev=gameData[rows[horiz,0]];
+            for(let horizInner=1;horizInner<3;horizInner++){
+                curr=gameData[rows,[horiz,horizInner]];
+                if(prev==curr){
+                    win++;
+                }
+                prev=curr;
+                console.log({prev,curr});
+            }
+            win=0;//reset
+        }
+        if(win>3){
+            console.log("you win motherfucker");
         }
         //check columns
         //check diagonals
@@ -60,9 +75,10 @@ const ticTacToe=(()=>{
             displayData(gameData,clickIndex); 
         }
         round++;
-        if(round>9){
+        if(round>=9){
             //check for win.
             winChecker(gameData);
+            
         }
     }
     return {displayData}

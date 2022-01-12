@@ -1,6 +1,7 @@
 :root{
-    --gridColor:rgb(153, 118, 118); /*controls the color of the grid*/
+    --gridColor:rgb(122, 46, 46); /*controls the color of the grid*/
 }
+
 .title{
     font-size: 50px;
 }
@@ -9,6 +10,7 @@ body{
     display:flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(153, 118, 118);
 }
 #grid{
     display:grid;
