@@ -36,32 +36,80 @@ const ticTacToe=(()=>{
     const arrayControl = (symbol,clickIndex) =>{
         gameData[clickIndex]=symbol; 
     }
-
+    //this function works but not well..
     const winChecker =(gameData) => {
         let prev=0;
         let curr=0;
         let win=0;
+        let winForReal=0;
         let columns=[[0,3,6],[1,4,7],[2,5,8]];
         let rows=[[0,1,2],[3,4,5],[6,7,8]];
-        let diagonals=[[0,4,8][2,4,6]];
+        let diagonals=[[0,4,8],[2,4,6]];
         //check rows
         for(let horiz=0;horiz<3;horiz++){
-            prev=gameData[rows[horiz,0]];
+            prev=gameData[rows[horiz][0]];
             for(let horizInner=1;horizInner<3;horizInner++){
-                curr=gameData[rows,[horiz,horizInner]];
-                if(prev==curr){
+                curr=gameData[rows[horiz][horizInner]];
+                if(prev==curr & curr!=undefined){
                     win++;
+                }else
+                    win=0;
+                if(win>=2){
+                    winForReal=1;
+                    console.log("horiz win by "+ curr);
+                    break;
                 }
                 prev=curr;
-                console.log({prev,curr});
             }
             win=0;//reset
         }
-        if(win>3){
+
+        //check columns
+        prev=0;
+        curr=0;
+        win=0;
+        for(let collum=0;collum<3;collum++){
+            prev=gameData[columns[collum][0]];
+            for(let columInner=1;columInner<3;columInner++){
+                curr=gameData[columns[collum][columInner]];
+                if(prev==curr & curr!=undefined){
+                    win++;
+                }else
+                    win=0;
+                if(win>=2){
+                    winForReal=1;
+                    console.log("column win by "+ curr);
+                    break;
+                }
+                prev=curr;
+            }
+            win=0;//reset
+        }
+        //check diagonals
+        prev=0;
+        curr=0;
+        win=0;
+        for(let diagz=0;diagz<2;diagz++){
+            prev=gameData[diagonals[diagz][0]];
+            for(let diagzInner=1;diagzInner<3;diagzInner++){
+                curr=gameData[diagonals[diagz][diagzInner]];
+                if(prev==curr & curr!=undefined){
+                    win++;
+                }else
+                    win=0;
+                if(win>=2){
+                    winForReal=1;
+                    console.log("diagonal win by "+ curr);
+                    break;
+                }
+                prev=curr;
+                
+            }
+            win=0;//reset
+        }
+        if(winForReal){
             console.log("you win motherfucker");
         }
-        //check columns
-        //check diagonals
     }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
@@ -75,9 +123,10 @@ const ticTacToe=(()=>{
             displayData(gameData,clickIndex); 
         }
         round++;
+        winChecker(gameData);
         if(round>=9){
             //check for win.
-            winChecker(gameData);
+            
             
         }
     }
