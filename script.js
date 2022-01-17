@@ -6,7 +6,7 @@ const Player = (name,symbol) =>{
 
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
-    let gameData = [];
+    let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
     let round=0;
     let boxNumber=0;
     let clickIndex=0;
@@ -41,11 +41,24 @@ const ticTacToe=(()=>{
         gameData[clickIndex]=symbol; 
     }
 //patternChecker will take the data from the game, check it using the patter defined and then return true or false if there is a winner. 
-    const patternChecker=(data,patterToCheck)=>{
-
+    const patternChecker=(data,patternToCheck)=>{
+        let tempArray = []; //used to temporarily store values that will be compared later
+        let patternSubArrays=patternToCheck.length
+        for(let i=0;i<patternSubArrays;i++){ //outerloop for each pattern sub array
+            for(let l=0;l<3;l++){ //goes through each element and stores in tempArray. There always only 3 elements 
+                tempArray[l]=data[patternToCheck[i][l]];
+            }
+            console.log(tempArray);
+            if(allEqual(tempArray) & tempArray[0]!= -1){
+                console.log("All the same!");
+            }
+        }
     }
     //this function works but not well..
     const winChecker =(gameData,round) => {
+        patternChecker(gameData,rows);
+        patternChecker(gameData,columns);
+        patternChecker(gameData,diagonals);
         //check rows
         //check diagonals
         //check columns
@@ -54,7 +67,7 @@ const ticTacToe=(()=>{
     }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
-        if(gameData[clickIndex] != undefined) return;
+        if(gameData[clickIndex] != -1) return;
         if(round%2 == 0){
             arrayControl(player1.symbol,clickIndex);
             displayData(gameData,clickIndex);
@@ -64,7 +77,6 @@ const ticTacToe=(()=>{
             displayData(gameData,clickIndex); 
         }
         round++;
-
         winChecker(gameData,round);
 
     }
