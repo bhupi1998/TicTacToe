@@ -42,31 +42,46 @@ const ticTacToe=(()=>{
     }
 //patternChecker will take the data from the game, check it using the patter defined and then return true or false if there is a winner. 
     const patternChecker=(data,patternToCheck)=>{
+        let toReturn=-1;
         let tempArray = []; //used to temporarily store values that will be compared later
         let patternSubArrays=patternToCheck.length
         for(let i=0;i<patternSubArrays;i++){ //outerloop for each pattern sub array
             for(let l=0;l<3;l++){ //goes through each element and stores in tempArray. There always only 3 elements 
                 tempArray[l]=data[patternToCheck[i][l]];
             }
-            console.log(tempArray);
             if(allEqual(tempArray) & tempArray[0]!= -1){
-                console.log("All the same!");
+                toReturn=tempArray[0];
+                i=patternSubArrays+1; //forces for loops to exit immidiately 
+                break;
             }
         }
+        return toReturn;
     }
     //this function works but not well..
     const winChecker =(gameData,round) => {
-        patternChecker(gameData,rows);
-        patternChecker(gameData,columns);
-        patternChecker(gameData,diagonals);
-        //check rows
-        //check diagonals
-        //check columns
+        let resultRows=-1;
+        let resultCols=-1;
+        let resultDiag=-1;
+        resultRows=patternChecker(gameData,rows);
+        resultCols=patternChecker(gameData,columns);
+        resultDiag=patternChecker(gameData,diagonals);
         //declare game outcome
+        if(resultRows!=-1){
+            return resultRows;
+        }
+        else if(resultCols!=-1){
+            return resultCols;
+        }
+        else if(resultDiag!=-1){
+            return resultDiag;
+        }else if(round>=9)
+            return -1; //no winner found.
+        return 0;
         //end game
     }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
+        let gameOutcome=0; //stores the outcome of the game
         if(gameData[clickIndex] != -1) return;
         if(round%2 == 0){
             arrayControl(player1.symbol,clickIndex);
@@ -77,7 +92,10 @@ const ticTacToe=(()=>{
             displayData(gameData,clickIndex); 
         }
         round++;
-        winChecker(gameData,round);
+        gameOutcome=winChecker(gameData,round);
+        if(gameOutcome!=0){
+            console.log("something happened");
+        }
 
     }
     return {displayData,columns,rows,diagonals}
