@@ -79,6 +79,14 @@ const ticTacToe=(()=>{
         return 0;
         //end game
     }
+    const gameReset=()=>{
+        gameData=[-1,-1,-1,-1,-1,-1,-1,-1,-1,];
+        for(i=0;i<9;i++){
+            let nodeQ= gridDiv.querySelector(`#${boxList[i].id}`);
+            nodeQ.innerHTML='';
+            round=0;
+        }
+    }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
         let gameOutcome=0; //stores the outcome of the game
@@ -94,10 +102,15 @@ const ticTacToe=(()=>{
         round++;
         gameOutcome=winChecker(gameData,round);
         if(gameOutcome!=0){
-            console.log("something happened");
+            if(gameOutcome==-1){
+                console.log("It's a tie!");
+            }else{
+                console.log(gameOutcome + " has won");
+            }
+            setTimeout(gameReset,1000);//wait 1 sec before resetting everything.
         }
 
     }
-    return {displayData,columns,rows,diagonals}
+    return {}
 })();
 
