@@ -1,11 +1,12 @@
 :root{
-    --gridColor:rgb(122, 46, 46); /*controls the color of the grid*/
+    --gridColor:#92bfb1; /*controls the color of the grid*/
 }
 *{
     box-sizing: border-box;
 }
 .title{
     font-size: 50px;
+    color:#114b5f;
 }
 
 body{
@@ -16,7 +17,7 @@ body{
     flex-direction: column;
     position: absolute;
     align-items: center;
-    background-color: rgb(153, 118, 118);
+    background-color: #DAD6D6;
 }
 #grid{
     display:grid;
@@ -24,6 +25,7 @@ body{
     height:900px;
     grid-template-columns: 300px 300px 300px;
     grid-template-rows: 300px 300px 300px;
+    color: #f4ac45;
     /*border:solid var(--gridColor);*/
 }
 
@@ -88,6 +90,7 @@ body{
     display: flex;
     flex-direction:row;
     gap:200px;
+    color:#e9190f;
 }
 
 .playerScoreBoard{
@@ -103,8 +106,9 @@ body{
     left:50%;
     transform: translate(-50%,-50%);
     z-index: 10;
-    background-color: rgb(180, 154, 98);
-    height: 1000px;
-    width:1000px;
+    background-color:#114B5F;
+    color:#f4ac45;
+    height: 500px;
+    width:500px;
 
 }

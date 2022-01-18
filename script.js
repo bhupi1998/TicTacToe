@@ -19,6 +19,7 @@ const ticTacToe=(()=>{
     const diagonals=[[0,4,8],[2,4,6]];
 
     const gridDiv= document.querySelector('#grid');
+    const popUpWindow=document.querySelector('.userSelectionPop')
     let boxList=gridDiv.querySelectorAll(".quadrants");
     //event listeners
     gridDiv.addEventListener('click',function(e){
