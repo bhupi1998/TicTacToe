@@ -4,10 +4,9 @@ const Player = (name,symbol) =>{
     const score=0;
     return {name,symbol,score};
 }
-//declaring these here. not sure if good idea just yet. Trying to get this working first
-const player1= Player('george','X');
-const player2= Player('jeff','O');
-
+//setting default player vals
+let player1=Player("player1",'X');
+let player2=Player('player2','O');
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
     let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
@@ -20,7 +19,11 @@ const ticTacToe=(()=>{
 
     const gridDiv= document.querySelector('#grid');
     const popUpWindow=document.querySelector('.userSelectionPop')
-    let boxList=gridDiv.querySelectorAll(".quadrants");
+    const popUpSubmit=popUpWindow.querySelector('#popUpSubmit');
+    const boxList=gridDiv.querySelectorAll(".quadrants");
+    const player1ScoreName=document.querySelector('#player1ScoreName'); 
+    const player2ScoreName=document.querySelector('#player2ScoreName'); 
+
     //event listeners
     gridDiv.addEventListener('click',function(e){
         let clickId=e.path[0].id;
@@ -30,6 +33,17 @@ const ticTacToe=(()=>{
         //call function gameControl
         gameControl(player1,player2,clickIndex);
 
+    });
+
+    popUpSubmit.addEventListener('click',function(){
+        let player1Name=document.querySelector('#player1Name').value;
+        let player2Name=document.querySelector('#player2Name').value;
+        if(!player1Name)
+            player1= Player(player1Name,'X');
+        if(!player2Name)
+            player2= Player(player2Name,'O');
+        player1ScoreName.innerHTML=`${player1.name}`;
+        player2ScoreName.innerHTML=`${player2.name}`;
     });
     //checks if values in given array are all the same
     const allEqual = arr => arr.every(v => v === arr[0]); //TODO understand this https://stackoverflow.com/questions/14832603/check-if-all-values-of-array-are-equal
