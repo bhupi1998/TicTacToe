@@ -101,6 +101,11 @@ body{
 }
 
 .userSelectionPop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10%;
     position: absolute;
     top:50%;
     left:50%;
@@ -111,4 +116,9 @@ body{
     height: 500px;
     width:500px;
 
+}
+
+.playerEntryCombined{
+    display: flex;
+    flex-direction: column;
 }

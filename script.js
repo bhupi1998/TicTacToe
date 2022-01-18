@@ -5,8 +5,8 @@ const Player = (name,symbol) =>{
     return {name,symbol,score};
 }
 //setting default player vals
-let player1=Player("player1",'X');
-let player2=Player('player2','O');
+let player1=Player("Player1",'X');
+let player2=Player('Player2','O');
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
     let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
@@ -38,12 +38,13 @@ const ticTacToe=(()=>{
     popUpSubmit.addEventListener('click',function(){
         let player1Name=document.querySelector('#player1Name').value;
         let player2Name=document.querySelector('#player2Name').value;
-        if(!player1Name)
+        if(player1Name)
             player1= Player(player1Name,'X');
-        if(!player2Name)
+        if(player2Name)
             player2= Player(player2Name,'O');
         player1ScoreName.innerHTML=`${player1.name}`;
         player2ScoreName.innerHTML=`${player2.name}`;
+        popUpWindow.style.display='none';
     });
     //checks if values in given array are all the same
     const allEqual = arr => arr.every(v => v === arr[0]); //TODO understand this https://stackoverflow.com/questions/14832603/check-if-all-values-of-array-are-equal
