@@ -77,3 +77,16 @@ body{
     justify-content: center;
     font-size: 300px;
 }
+
+.users{
+    display: flex;
+    flex-direction:row;
+    gap:200px;
+}
+
+.playerScoreBoard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
