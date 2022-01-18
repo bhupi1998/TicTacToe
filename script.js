@@ -1,8 +1,12 @@
 //factory functions, modules and variable declerations.
 
 const Player = (name,symbol) =>{
-    return {name,symbol};
+    const score=0;
+    return {name,symbol,score};
 }
+//declaring these here. not sure if good idea just yet. Trying to get this working first
+const player1= Player('george','X');
+const player2= Player('jeff','O');
 
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
@@ -13,9 +17,6 @@ const ticTacToe=(()=>{
     const columns=[[0,3,6],[1,4,7],[2,5,8]];
     const rows=[[0,1,2],[3,4,5],[6,7,8]];
     const diagonals=[[0,4,8],[2,4,6]];
-    //declaring these here. not sure if good idea just yet. Trying to get this working first
-    const player1= Player('george','X');
-    const player2= Player('jeff','O');
 
     const gridDiv= document.querySelector('#grid');
     let boxList=gridDiv.querySelectorAll(".quadrants");
