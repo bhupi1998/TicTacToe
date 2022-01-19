@@ -9,43 +9,54 @@
     <title>TicTacToe</title>
 </head>
 <body>
-    <header class="title">TIC TAC TOE</header>
-    <div class="userSelectionPop">
-        <div class="playerEntryCombined">
-        <div class="playerEntry">
-            <div class="playerNameEntry" id="Player1Name">
-                <label for="player1Name">Player1 Name</label>
-                <input type="text" name="player1Name" id="player1Name" placeholder="Player1">
+    <div class="fullScreenOverlay">
+        <header class="title">TIC TAC TOE</header>
+            <div id="userSelectionPop" class='popUp'>
+                <div class="playerEntryCombined">
+                <div class="playerEntry">
+                    <div class="playerNameEntry" id="Player1Name">
+                        <label for="player1Name">Player1 Name</label>
+                        <input type="text" name="player1Name" id="player1Name" placeholder="Player1">
+                    </div>
+                </div>
+                <div class="playerEntry">
+                    <div class="playerNameEntry" id="Player2Name"></div>
+                    <label for="player2Name">Player2 Name</label>
+                    <input type="text" name="player2Name" id="player2Name" placeholder="Player2">
+                </div>
+                </div>
+                <input type="submit" value="Ready" id='popUpSubmit'>
+            </div>
+
+            <div id="winnerPopUp" class='popUp'>
+                <div class="winner">The winner is:</div>
+                <div class="playerWinner"></div>
+                <input type="submit" value="Again" class="restartGame">
+            </div>
+
+
+        <div class="users">
+            <div class="playerScoreBoard">
+                <div class="user" id="player1ScoreName">Player1</div>
+                <div class="score" id="player1Score">0</div>
+            </div>
+            <div class="playerScoreBoard">
+                <div class="user" id="player2ScoreName">Player2</div>
+                <div class="score" id="player2Score">0</div>
             </div>
         </div>
-        <div class="playerEntry">
-            <div class="playerNameEntry" id="Player2Name"></div>
-            <label for="player2Name">Player2 Name</label>
-            <input type="text" name="player2Name" id="player2Name" placeholder="Player2">
+
+        <div id="grid">
+            <div id="box1" class="quadrants"></div>
+            <div id="box2" class="quadrants"></div>
+            <div id="box3" class="quadrants"></div>
+            <div id="box4" class="quadrants"></div>
+            <div id="box5" class="quadrants"></div>
+            <div id="box6" class="quadrants"></div>
+            <div id="box7" class="quadrants"></div>
+            <div id="box8" class="quadrants"></div>
+            <div id="box9" class="quadrants"></div>
         </div>
-        </div>
-        <input type="submit" value="Ready" id='popUpSubmit'>
-    </div>
-    <div class="users">
-        <div class="playerScoreBoard">
-            <div class="user" id="player1ScoreName">Player1</div>
-            <div class="score" id="player1Score">0</div>
-         </div>
-         <div class="playerScoreBoard">
-            <div class="user" id="player2ScoreName">Player2</div>
-            <div class="score" id="player2Score">0</div>
-        </div>
-    </div>
-    <div id="grid">
-        <div id="box1" class="quadrants"></div>
-        <div id="box2" class="quadrants"></div>
-        <div id="box3" class="quadrants"></div>
-        <div id="box4" class="quadrants"></div>
-        <div id="box5" class="quadrants"></div>
-        <div id="box6" class="quadrants"></div>
-        <div id="box7" class="quadrants"></div>
-        <div id="box8" class="quadrants"></div>
-        <div id="box9" class="quadrants"></div>
     </div>
 </body>
 </html>

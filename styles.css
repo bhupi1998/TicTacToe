@@ -10,14 +10,8 @@
 }
 
 body{
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    display:flex;
-    flex-direction: column;
-    position: absolute;
-    align-items: center;
-    background-color: #DAD6D6;
+    height: 100%;
+    width: 100%;
 }
 #grid{
     display:grid;
@@ -26,7 +20,6 @@ body{
     grid-template-columns: 300px 300px 300px;
     grid-template-rows: 300px 300px 300px;
     color: #f4ac45;
-    /*border:solid var(--gridColor);*/
 }
 
 
@@ -100,25 +93,52 @@ body{
     gap:10px;
 }
 
-.userSelectionPop{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap:10%;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    z-index: 10;
-    background-color:#114B5F;
-    color:#f4ac45;
-    height: 500px;
-    width:500px;
-
-}
 
 .playerEntryCombined{
     display: flex;
     flex-direction: column;
+}
+
+#userSelectionPop{
+    display: flex;
+}
+#winnerPopUp{
+    display: none;
+}
+.playerWinner{
+    height: 15px;
+    width: 100px;
+    background-color: red;
+}
+
+.popUp{
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    background-color:#114c5fd3;
+    color:#f4ac45;
+    align-items: center;
+    height: 500px;
+    width: 500px;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+}
+
+.fullScreenOverlay{
+    display: block;
+    z-index:999;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    background-color: #DAD6D6;
+    height:100%;
+    width:100%;
+    background-color: red;
 }

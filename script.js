@@ -1,5 +1,5 @@
 //factory functions, modules and variable declerations.
-
+const GAME_RESET_TIMEOUT=500;
 const Player = (name,symbol) =>{
     const score=0;
     return {name,symbol,score};
@@ -18,14 +18,15 @@ const ticTacToe=(()=>{
     const diagonals=[[0,4,8],[2,4,6]];
 
     const gridDiv= document.querySelector('#grid');
-    const popUpWindow=document.querySelector('.userSelectionPop')
+    const popUpWindow=document.querySelector('#userSelectionPop')
     const popUpSubmit=popUpWindow.querySelector('#popUpSubmit');
     const boxList=gridDiv.querySelectorAll(".quadrants");
     const player1ScoreName=document.querySelector('#player1ScoreName'); 
     const player2ScoreName=document.querySelector('#player2ScoreName'); 
     const player1ScoreDisplay=document.querySelector('#player1Score');
     const player2ScoreDisplay=document.querySelector('#player2Score');
-
+    const winnerPopUp=document.querySelector('#winnerPopUp')
+    const gameResetButton=document.querySelector('.restartGame');
     //event listeners
     gridDiv.addEventListener('click',function(e){
         let clickId=e.path[0].id;
@@ -37,6 +38,14 @@ const ticTacToe=(()=>{
 
     });
 
+    gameResetButton.addEventListener('click',function(){
+        winnerPopUp.style.display="none";
+        popUpWindow.style.display='flex';
+        player1.score=0;
+        player2.score=0;
+        player1ScoreDisplay.innerHTML=`${player1.score}`;
+        player2ScoreDisplay.innerHTML=`${player2.score}`;
+    });
     popUpSubmit.addEventListener('click',function(){
         let player1Name=document.querySelector('#player1Name').value;
         let player2Name=document.querySelector('#player2Name').value;
@@ -106,17 +115,23 @@ const ticTacToe=(()=>{
             round=0;
         }
     }
+    const gameEnd=()=>{
+        gameReset();
+        winnerPopUp.style.display="flex";
+    }
     const updateScore=(player1,player2,gameOutcome)=>{
         if(gameOutcome === player1.symbol){
             player1.score++;
-            console.log(player1.name + " won");
         }
         else if(gameOutcome === player2.symbol){
             player2.score++;
-            console.log(player2.name + " won");
         }
         player1ScoreDisplay.innerHTML=`${player1.score}`;
         player2ScoreDisplay.innerHTML=`${player2.score}`;
+        if(player1.score>=3||player2.score>=3){
+            //game over
+            gameEnd();
+        }
     }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
@@ -139,7 +154,7 @@ const ticTacToe=(()=>{
                 updateScore(player1,player2,gameOutcome);
 
             }
-            setTimeout(gameReset,1000);//wait 1 sec before resetting everything.
+            setTimeout(gameReset,GAME_RESET_TIMEOUT);//wait 1 sec before resetting everything.
         }
 
     }
