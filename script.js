@@ -23,6 +23,8 @@ const ticTacToe=(()=>{
     const boxList=gridDiv.querySelectorAll(".quadrants");
     const player1ScoreName=document.querySelector('#player1ScoreName'); 
     const player2ScoreName=document.querySelector('#player2ScoreName'); 
+    const player1ScoreDisplay=document.querySelector('#player1Score');
+    const player2ScoreDisplay=document.querySelector('#player2Score');
 
     //event listeners
     gridDiv.addEventListener('click',function(e){
@@ -104,6 +106,18 @@ const ticTacToe=(()=>{
             round=0;
         }
     }
+    const updateScore=(player1,player2,gameOutcome)=>{
+        if(gameOutcome === player1.symbol){
+            player1.score++;
+            console.log(player1.name + " won");
+        }
+        else if(gameOutcome === player2.symbol){
+            player2.score++;
+            console.log(player2.name + " won");
+        }
+        player1ScoreDisplay.innerHTML=`${player1.score}`;
+        player2ScoreDisplay.innerHTML=`${player2.score}`;
+    }
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
         let gameOutcome=0; //stores the outcome of the game
@@ -122,7 +136,8 @@ const ticTacToe=(()=>{
             if(gameOutcome==-1){
                 console.log("It's a tie!");
             }else{
-                console.log(gameOutcome + " has won");
+                updateScore(player1,player2,gameOutcome);
+
             }
             setTimeout(gameReset,1000);//wait 1 sec before resetting everything.
         }
