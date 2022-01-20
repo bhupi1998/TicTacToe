@@ -26,7 +26,7 @@ const ticTacToe=(()=>{
     const player1ScoreDisplay=document.querySelector('#player1Score');
     const player2ScoreDisplay=document.querySelector('#player2Score');
     const winnerPopUp=document.querySelector('#winnerPopUp')
-    const gameResetButton=document.querySelector('.restartGame');
+    const gameResetButton=document.querySelector('#restartGame');
     const overLay=document.querySelector('.overlayDiv');
     //event listeners
     gridDiv.addEventListener('click',function(e){

@@ -129,6 +129,7 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 20px;
+    gap:50px;
 }
 
 .overlayDiv{
@@ -142,6 +143,7 @@ body{
     align-items: center;
     height:100%;
     width:100%;
+    
 }
 
 .playerWinner{
@@ -150,4 +152,18 @@ body{
 }
 .winner{
     color:#92BFB1;
+}
+
+.gameCtrlBtn{
+    border-radius: 2px;
+    color:#114B5F;
+    border:none;
+    background-color: #F4AC45;
+    font-size: 40px;
+    height:auto;
+    width:auto;
+}
+
+.gameCtrlBtn:hover{
+    transform: scale(1.2);
 }
