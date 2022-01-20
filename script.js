@@ -42,7 +42,6 @@ const ticTacToe=(()=>{
     gameResetButton.addEventListener('click',function(){
         winnerPopUp.style.display="none";
         popUpWindow.style.display='flex';
-        overLay.zIndex=-2;
         player1.score=0;
         player2.score=0;
         player1ScoreDisplay.innerHTML=`${player1.score}`;
@@ -58,7 +57,7 @@ const ticTacToe=(()=>{
         player1ScoreName.innerHTML=`${player1.name}`;
         player2ScoreName.innerHTML=`${player2.name}`;
         popUpWindow.style.display='none';
-        overLay.zIndex=-2;
+        overLay.style.zIndex='-2';
     });
     //checks if values in given array are all the same
     const allEqual = arr => arr.every(v => v === arr[0]); //TODO understand this https://stackoverflow.com/questions/14832603/check-if-all-values-of-array-are-equal
@@ -121,6 +120,7 @@ const ticTacToe=(()=>{
     const gameEnd=()=>{
         gameReset();
         winnerPopUp.style.display="flex";
+        overLay.style.zIndex='2';
     }
     const updateScore=(player1,player2,gameOutcome)=>{
         if(gameOutcome === player1.symbol){
