@@ -117,10 +117,11 @@ const ticTacToe=(()=>{
             round=0;
         }
     }
-    const gameEnd=()=>{
+    const gameEnd=(winner)=>{
         gameReset();
         winnerPopUp.style.display="flex";
         overLay.style.zIndex='2';
+        winnerPopUp.querySelector('.playerWinner').innerHTML=`${winner.name}`;
     }
     const updateScore=(player1,player2,gameOutcome)=>{
         if(gameOutcome === player1.symbol){
@@ -131,9 +132,13 @@ const ticTacToe=(()=>{
         }
         player1ScoreDisplay.innerHTML=`${player1.score}`;
         player2ScoreDisplay.innerHTML=`${player2.score}`;
-        if(player1.score>=3||player2.score>=3){
+        if(player1.score>=3){
             //game over
-            gameEnd();
+            gameEnd(player1);
+        }
+        else if(player2.score>=3){
+            //game over
+            gameEnd(player2);
         }
     }
     const gameControl =(player1,player2,clickIndex) =>{
@@ -155,7 +160,6 @@ const ticTacToe=(()=>{
                 console.log("It's a tie!");
             }else{
                 updateScore(player1,player2,gameOutcome);
-
             }
             setTimeout(gameReset,GAME_RESET_TIMEOUT);//wait 1 sec before resetting everything.
         }
