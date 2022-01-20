@@ -16,6 +16,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #DAD6D6;
 }
 #grid{
     display:grid;
@@ -110,8 +111,8 @@ body{
     display: none;
 }
 .playerWinner{
-    height: 15px;
-    width: 100px;
+    height: auto;
+    width:auto;
 }
 
 .popUp{
@@ -141,4 +142,12 @@ body{
     align-items: center;
     height:100%;
     width:100%;
+}
+
+.playerWinner{
+    color:#F4AC45;
+    font-size: 50px;
+}
+.winner{
+    color:#92BFB1;
 }
