@@ -5,9 +5,10 @@
     box-sizing: border-box;
     z-index:1;
 }
-.title{
+.header{
     font-size: 50px;
     color:#114b5f;
+    display: flex;
 }
 
 body{
@@ -102,6 +103,11 @@ body{
 .playerEntryCombined{
     display: flex;
     flex-direction: column;
+    gap:20px;
+}
+
+.playerEntry{
+    
 }
 
 #userSelectionPop{
@@ -122,14 +128,13 @@ body{
     background-color:#114c5fd3;
     color:#f4ac45;
     align-items: center;
-    height: 500px;
-    width: 500px;
+    height: 200px;
+    width: 400px;
     position:absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 20px;
-    gap:50px;
 }
 
 .overlayDiv{
@@ -155,6 +160,7 @@ body{
 }
 
 .gameCtrlBtn{
+    margin-top: 20px;
     border-radius: 2px;
     color:#114B5F;
     border:none;

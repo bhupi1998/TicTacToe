@@ -9,7 +9,10 @@
     <title>TicTacToe</title>
 </head>
 <body>
-    <header class="title">TIC TAC TOE</header>
+    <header class="header">
+        <div>TIC TAC TOE</div>
+        <input type="submit" value="restart" id="restartGame" class="gameCtrlBtn">
+    </header>
     <div id="userSelectionPop" class='popUp'>
         <div class="playerEntryCombined">
         <div class="playerEntry">
@@ -19,9 +22,10 @@
             </div>
         </div>
         <div class="playerEntry">
-            <div class="playerNameEntry" id="Player2Name"></div>
-            <label for="player2Name">Player2 Name</label>
-            <input type="text" name="player2Name" id="player2Name" placeholder="Player2">
+            <div class="playerNameEntry" id="Player2Name">
+                <label for="player2Name">Player2 Name</label>
+                <input type="text" name="player2Name" id="player2Name" placeholder="Player2">
+            </div>
         </div>
         </div>
         <input type="submit" value="Ready" id='popUpSubmit' class="gameCtrlBtn">
