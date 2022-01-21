@@ -26,7 +26,8 @@ const ticTacToe=(()=>{
     const player1ScoreDisplay=document.querySelector('#player1Score');
     const player2ScoreDisplay=document.querySelector('#player2Score');
     const winnerPopUp=document.querySelector('#winnerPopUp')
-    const gameResetButton=document.querySelector('#restartGame');
+    const gameResetPopUp=document.querySelector('#restartGamePopUp');
+    const gameResetExternal=document.querySelector('#restartGameExternal');
     const overLay=document.querySelector('.overlayDiv');
     //event listeners
     gridDiv.addEventListener('click',function(e){
@@ -39,13 +40,23 @@ const ticTacToe=(()=>{
 
     });
 
-    gameResetButton.addEventListener('click',function(){
+    gameResetPopUp.addEventListener('click',function(){
         winnerPopUp.style.display="none";
         popUpWindow.style.display='flex';
         player1.score=0;
         player2.score=0;
         player1ScoreDisplay.innerHTML=`${player1.score}`;
         player2ScoreDisplay.innerHTML=`${player2.score}`;
+        gameReset();
+    });
+    gameResetExternal.addEventListener('click',function(){
+        winnerPopUp.style.display="none";
+        popUpWindow.style.display='flex';
+        player1.score=0;
+        player2.score=0;
+        player1ScoreDisplay.innerHTML=`${player1.score}`;
+        player2ScoreDisplay.innerHTML=`${player2.score}`;
+        gameReset();
     });
     popUpSubmit.addEventListener('click',function(){
         let player1Name=document.querySelector('#player1Name').value;

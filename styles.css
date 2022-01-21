@@ -9,6 +9,7 @@
     font-size: 50px;
     color:#114b5f;
     display: flex;
+    flex-direction: column;
 }
 
 body{
@@ -170,6 +171,16 @@ body{
     width:auto;
 }
 
-.gameCtrlBtn:hover{
+.gameCtrlBtn:hover,#restartGameExternal:hover{
     transform: scale(1.2);
 }
+#restartGameExternal{
+    border-radius: 10px;
+    color:#114B5F;
+    border:none;
+    background-color: #F4AC45;
+    font-size: 20px;
+    height:auto;
+    width:auto;
+}
+
