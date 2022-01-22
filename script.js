@@ -195,6 +195,7 @@ const aiFighter = (()=>{
         let randomNumber=-2;
         while(ticTacToe.gameControl(player1,player2,randomNumber)){
             randomNumber=Math.floor(Math.random()*10); 
+            console.log({round})
         }
         
     }
