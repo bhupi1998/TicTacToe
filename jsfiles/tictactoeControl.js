@@ -8,6 +8,10 @@ const Player = (name,symbol) =>{
 //setting default player vals
 let player1=Player("Player1",'X');
 let player2=Player('Player2','O');
+let clickIndex=0;
+let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
+var round=0;
+
 
 const gridDiv= document.querySelector('#grid');
 const popUpWindow=document.querySelector('#userSelectionPop')
@@ -22,9 +26,6 @@ const gameResetPopUp=document.querySelector('#restartGamePopUp');
 const gameResetExternal=document.querySelector('#restartGameExternal');
 const overLay=document.querySelector('.overlayDiv');
 
-let clickIndex=0;
-let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
-var round=0;
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
     let boxNumber=0;
@@ -150,6 +151,16 @@ const ticTacToe=(()=>{
     return {gameControl,gameReset}
 })();
 
+function resetPopUp(){ //when user presses a reset button the event listener calls this
+    winnerPopUp.style.display="none";
+    popUpWindow.style.display='flex';
+    player1.score=0;
+    player2.score=0;
+    player1ScoreDisplay.innerHTML=`${player1.score}`;
+    player2ScoreDisplay.innerHTML=`${player2.score}`;
+    ticTacToe.gameReset();
+}
+
 /*****************************************************Event Listeners******************************************************************************************************** */
 
 //event listeners
@@ -167,22 +178,10 @@ gridDiv.addEventListener('click',function(e){
 });
 
 gameResetPopUp.addEventListener('click',function(){
-    winnerPopUp.style.display="none";
-    popUpWindow.style.display='flex';
-    player1.score=0;
-    player2.score=0;
-    player1ScoreDisplay.innerHTML=`${player1.score}`;
-    player2ScoreDisplay.innerHTML=`${player2.score}`;
-    ticTacToe.gameReset();
+    resetPopUp()
 });
 gameResetExternal.addEventListener('click',function(){
-    winnerPopUp.style.display="none";
-    popUpWindow.style.display='flex';
-    player1.score=0;
-    player2.score=0;
-    player1ScoreDisplay.innerHTML=`${player1.score}`;
-    player2ScoreDisplay.innerHTML=`${player2.score}`;
-    ticTacToe.gameReset();
+    resetPopUp()
 });
 popUpSubmit.addEventListener('click',function(){
     let player1Name=document.querySelector('#player1Name').value;
@@ -196,17 +195,3 @@ popUpSubmit.addEventListener('click',function(){
     popUpWindow.style.display='none';
     overLay.style.zIndex='-2';
 });
-/*******************************************************AI Controls******************************************************************************************* */
-//module for ai
-const aiFighter = (()=>{
-    const randomMove = () =>{
-        let randomNumber=-2;
-        let matchOutcome;
-        do{
-            matchOutcome=ticTacToe.gameControl(player1,player2,randomNumber);
-            randomNumber=Math.floor(Math.random()*10); 
-        }while(matchOutcome!=2 && matchOutcome !=0)
-        
-    }
-    return {randomMove};
-})();
