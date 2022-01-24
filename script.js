@@ -62,7 +62,7 @@ const ticTacToe=(()=>{
         }
         return toReturn;
     }
-    //this function works but not well..
+    //checks the game outcome and returns the symbol of the player that won.
     const winChecker =(gameData,round) => {
         let resultRows=-1;
         let resultCols=-1;
@@ -80,9 +80,8 @@ const ticTacToe=(()=>{
         else if(resultDiag!=-1){
             return resultDiag;
         }else if(round>=9)
-            return -1; //no winner found.
-        return 0;
-        //end game
+            return 0; //no winner found.
+        return '-'; //default value, no winner yet
     }
     const gameReset=()=>{
         gameData=[-1,-1,-1,-1,-1,-1,-1,-1,-1,];
@@ -119,8 +118,9 @@ const ticTacToe=(()=>{
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
         let gameOutcome=0; //stores the outcome of the game
-        if(gameData[clickIndex] != -1) return 1;
-        if(round%2 == 0){
+        let toReturn='-'; //default
+        if(gameData[clickIndex] != -1) return 1;//if the array element is been filled return 1. AKA try another spot
+        if(round%2 == 0){ //updates which player's symbol appears no grid
             arrayControl(player1.symbol,clickIndex);
             displayData(gameData,clickIndex);
         }
@@ -130,15 +130,22 @@ const ticTacToe=(()=>{
         }
         round++;
         gameOutcome=winChecker(gameData,round);
-        if(gameOutcome!=0){
-            if(gameOutcome==-1){
+        if(gameOutcome!='-'){ //if the game is finished then continue here
+            console.log(gameData);
+            if(gameOutcome==0){
                 console.log("It's a tie!");
+                toReturn=0;//it's a tie
             }else{
-                updateScore(player1,player2,gameOutcome);
+                updateScore(player1,player2,gameOutcome); //we have a winner
+                if(gameOutcome==player1.symbol){
+                    toReturn=10;//player1 won
+                }else if(gameOutcome==player2.symbol){
+                    toReturn=-10;//player 2 won
+                }
             }
             setTimeout(gameReset,GAME_RESET_TIMEOUT);//wait 1 sec before resetting everything.
         }
-        return 0;
+        return toReturn;
     }
     return {gameControl,gameReset}
 })();
@@ -152,9 +159,9 @@ gridDiv.addEventListener('click',function(e){
     
     clickIndex=Number(clickId.slice(3))-1; //! need to offset by 1. Should have indexed grid by 0
     //call function gameControl
-    ticTacToe.gameControl(player1,player2,clickIndex);
+    let matchOutcome=ticTacToe.gameControl(player1,player2,clickIndex); //function returns +10,-10 or 0 if game is over '-' other wise
     //used for ai system
-    if(round%2!=0){
+    if(round%2!=0 && matchOutcome=='-'){
         aiFighter.randomMove();
     }
 });
@@ -190,13 +197,15 @@ popUpSubmit.addEventListener('click',function(){
     overLay.style.zIndex='-2';
 });
 /*******************************************************AI Controls******************************************************************************************* */
+//module for ai
 const aiFighter = (()=>{
     const randomMove = () =>{
         let randomNumber=-2;
-        while(ticTacToe.gameControl(player1,player2,randomNumber)){
+        let matchOutcome;
+        do{
+            matchOutcome=ticTacToe.gameControl(player1,player2,randomNumber);
             randomNumber=Math.floor(Math.random()*10); 
-            console.log({round})
-        }
+        }while(matchOutcome!=2 && matchOutcome !=0)
         
     }
     return {randomMove};
