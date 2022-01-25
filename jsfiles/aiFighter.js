@@ -7,7 +7,7 @@ const aiFighter = (()=>{
         do{
             matchOutcome=ticTacToe.gameControl(player1,player2,randomNumber);
             randomNumber=Math.floor(Math.random()*10); 
-        }while(matchOutcome!=2 && matchOutcome !=0)
+        }while(matchOutcome)
         
     }
     return {randomMove};
