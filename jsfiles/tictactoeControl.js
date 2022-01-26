@@ -7,7 +7,7 @@ const Player = (name,symbol) =>{
 }
 //setting default player vals
 let player1=Player("Player1",'X');
-let player2=Player('Player2','O');
+let player2=Player('Player2','O');//maximizer
 let clickIndex=0;
 let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
 var round=0;
@@ -152,7 +152,7 @@ const ticTacToe=(()=>{
         }
         return toReturn;
     }
-    return {gameControl,gameReset}
+    return {gameControl,gameReset,winChecker}
 })();
 
 function resetPopUp(){ //when user presses a reset button the event listener calls this
@@ -178,7 +178,8 @@ gridDiv.addEventListener('click',function(e){
     let matchOutcome=ticTacToe.gameControl(player1,player2,clickIndex); //function returns +10,-10 or 0 if game is over '-' other wise
     //used for ai system
     if(round%2!=0 && matchOutcome =='-'){
-        aiFighter.randomMove();
+        let bestMove= aiFighter.findBestMove(gameData,player2.symbol);
+        ticTacToe.gameControl(player1,player2,bestMove);
     }
 });
 
