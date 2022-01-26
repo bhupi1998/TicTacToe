@@ -64,10 +64,11 @@ const ticTacToe=(()=>{
         return toReturn;
     }
     //checks the game outcome and returns the symbol of the player that won.
-    const winChecker =(gameData,round) => {
+    const winChecker =(gameData) => {
         let resultRows=-1;
         let resultCols=-1;
         let resultDiag=-1;
+        let toReturn='-'; //default value, no winner yet
         resultRows=patternChecker(gameData,rows);
         resultCols=patternChecker(gameData,columns);
         resultDiag=patternChecker(gameData,diagonals);
@@ -80,9 +81,13 @@ const ticTacToe=(()=>{
         }
         else if(resultDiag!=-1){
             return resultDiag;
-        }else if(round>=9)
-            return 0; //no winner found.
-        return '-'; //default value, no winner yet
+        }else{
+            for(let i=0;i<gameData.length;i++){
+                if(gameData[i]==-1)
+                    toRetun=0;//tie
+            }
+        }
+        return toReturn; 
     }
     const gameReset=()=>{
         gameData=[-1,-1,-1,-1,-1,-1,-1,-1,-1,];
@@ -116,6 +121,7 @@ const ticTacToe=(()=>{
             gameEnd(player2);
         }
     }
+    //this is also the evaluation function to be used for the minimax algo
     const gameControl =(player1,player2,clickIndex) =>{
         //control game here
         let gameOutcome=0; //stores the outcome of the game
@@ -130,11 +136,9 @@ const ticTacToe=(()=>{
             displayData(gameData,clickIndex); 
         }
         round++;
-        gameOutcome=winChecker(gameData,round);
+        gameOutcome=winChecker(gameData);
         if(gameOutcome!='-'){ //if the game is finished then continue here
-            console.log(gameData);
             if(gameOutcome==0){
-                console.log("It's a tie!");
                 toReturn=0;//it's a tie
             }else{
                 updateScore(player1,player2,gameOutcome); //we have a winner
@@ -173,7 +177,7 @@ gridDiv.addEventListener('click',function(e){
     //call function gameControl
     let matchOutcome=ticTacToe.gameControl(player1,player2,clickIndex); //function returns +10,-10 or 0 if game is over '-' other wise
     //used for ai system
-    if(round%2!=0 && matchOutcome=='-'){
+    if(round%2!=0 && matchOutcome =='-'){
         aiFighter.randomMove();
     }
 });
