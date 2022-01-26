@@ -154,6 +154,7 @@ const ticTacToe=(()=>{
 function resetPopUp(){ //when user presses a reset button the event listener calls this
     winnerPopUp.style.display="none";
     popUpWindow.style.display='flex';
+    overLay.style.zIndex='2';
     player1.score=0;
     player2.score=0;
     player1ScoreDisplay.innerHTML=`${player1.score}`;
