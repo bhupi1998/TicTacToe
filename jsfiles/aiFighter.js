@@ -21,6 +21,7 @@ const aiFighter = (()=>{
             if(board[i]==-1){ //means position is empty 
                 board[i]=symbol;
                 let score=miniMax(board,0,false);
+                console.log(score);
                 if(score<bestScore){
                     bestScore=score;
                     bestMove=i;
