@@ -20,7 +20,7 @@ const aiFighter = (()=>{
         for(let i=0;i<board.length;i++){
             if(board[i]==-1){ //means position is empty 
                 board[i]=symbol;
-                let score=miniMax(board,0,false);
+                let score=miniMax(board,0,true);//!this should be true. Ai is the minimizer, A position has been chosen by it, it is maximizer's turn
                 console.log(score);
                 if(score<bestScore){
                     bestScore=score;
