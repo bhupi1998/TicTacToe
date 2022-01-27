@@ -9,7 +9,7 @@ const Player = (name,symbol) =>{
 let player1=Player("Player1",'X');
 let player2=Player('Player2','O');//maximizer
 let clickIndex=0;
-let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1,]; //array is initially filled with -1 to prevent errors
+let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1]; //array is initially filled with -1 to prevent errors
 var round=0;
 
 
@@ -68,7 +68,7 @@ const ticTacToe=(()=>{
         let resultRows=-1;
         let resultCols=-1;
         let resultDiag=-1;
-        let toReturn='-'; //default value, no winner yet
+        let toReturn=0; //default value, no winner yet
         resultRows=patternChecker(gameData,rows);
         resultCols=patternChecker(gameData,columns);
         resultDiag=patternChecker(gameData,diagonals);
@@ -84,7 +84,7 @@ const ticTacToe=(()=>{
         }else{
             for(let i=0;i<gameData.length;i++){
                 if(gameData[i]==-1)
-                    toRetun=0;//tie
+                    toReturn='-'; //means that there are moves that can be done.
             }
         }
         return toReturn; 
@@ -178,8 +178,8 @@ gridDiv.addEventListener('click',function(e){
     let matchOutcome=ticTacToe.gameControl(player1,player2,clickIndex); //function returns +10,-10 or 0 if game is over '-' other wise
     //used for ai system
     if(round%2!=0 && matchOutcome =='-'){
-        let bestMove= aiFighter.findBestMove(gameData,player2.symbol);
-        ticTacToe.gameControl(player1,player2,bestMove);
+       let bestMove= aiFighter.findBestMove(gameData,player2.symbol);
+       ticTacToe.gameControl(player1,player2,bestMove);
     }
 });
 
