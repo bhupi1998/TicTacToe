@@ -9,7 +9,7 @@ const Player = (name,symbol) =>{
 let player1=Player("Player1",'X');
 let player2=Player('Player2','O');//maximizer
 let clickIndex=0;
-let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1]; //array is initially filled with -1 to prevent errors
+let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1]; //array is initially filled with -1 to prevent errors ['X', 'O', 'X', 'X', 'O', 'O', -1, -1, -1];//
 var round=0;
 
 

@@ -16,12 +16,12 @@ const aiFighter = (()=>{
     }
     const findBestMove= (board,symbol) =>{
         let bestMove= -Infinity;
-        let bestScore=-Infinity;
+        let bestScore=Infinity;
         for(let i=0;i<board.length;i++){
             if(board[i]==-1){ //means position is empty 
                 board[i]=symbol;
                 let score=miniMax(board,0,false);
-                if(score>bestScore){
+                if(score<bestScore){
                     bestScore=score;
                     bestMove=i;
                 }
