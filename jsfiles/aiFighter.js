@@ -31,49 +31,49 @@ const aiFighter = (()=>{
         }
         return bestMove;
     }
-    return {randomMove,findBestMove};
+    //minimax algo function. This function is used to give the computer some 
+    //decision making ability.
+    function miniMax(board, depth, isMaximizingPlayer){
+        let gameStatus=ticTacToe.winChecker(board);
+        if(gameStatus!=='-'){ // if '-' is not returned it means that the game is finished
+            let toReturn;
+            switch(gameStatus){
+                case player1.symbol:
+                    toReturn=10;
+                    break;
+                case player2.symbol:
+                    toReturn=-10;
+                    break;
+                case 0:
+                    toReturn=0;
+            } 
+            return toReturn;//+10 for p1, -10 for p2
+        }
+        if(isMaximizingPlayer){
+            let bestVal=-Infinity;
+            for(let i=0;i<board.length;i++){
+                if(board[i]==-1){
+                    board[i]=player1.symbol;
+                    let value=miniMax(board,depth,false);
+                    board[i]=-1;
+                    bestVal=Math.max(bestVal,value);
+                }
+            }
+            return bestVal
+        }
+        else{
+            let bestVal=Infinity;
+            for(let i=0;i<board.length;i++){
+                if(board[i]==-1){
+                    board[i]=player2.symbol;
+                    let value=miniMax(board,depth,true);
+                    board[i]=-1;
+                    bestVal=Math.min(bestVal,value);
+                }
+            }
+            return bestVal        
+        }
+    }
+
+    return {randomMove,findBestMove,miniMax};
 })();
-//minimax algo function. This function is used to give the computer some 
-//decision making ability.
-function miniMax(board, depth, isMaximizingPlayer){
-    let gameStatus=ticTacToe.winChecker(board);
-    if(gameStatus!=='-'){ // if '-' is not returned it means that the game is finished
-        let toReturn;
-        switch(gameStatus){
-            case player1.symbol:
-                toReturn=10;
-                break;
-            case player2.symbol:
-                toReturn=-10;
-                break;
-            case 0:
-                toReturn=0;
-        } 
-        return toReturn;//+10 for p1, -10 for p2
-    }
-    if(isMaximizingPlayer){
-        let bestVal=-Infinity;
-        for(let i=0;i<board.length;i++){
-            if(board[i]==-1){
-                board[i]=player1.symbol;
-                let value=miniMax(board,depth,false);
-                board[i]=-1;
-                bestVal=Math.max(bestVal,value);
-            }
-        }
-        return bestVal
-    }
-    else{
-        let bestVal=Infinity;
-        for(let i=0;i<board.length;i++){
-            if(board[i]==-1){
-                board[i]=player2.symbol;
-                let value=miniMax(board,depth,true);
-                board[i]=-1;
-                bestVal=Math.min(bestVal,value);
-            }
-        }
-        return bestVal        
-    }
-}
-// aiFighter.findBestMove(gameData,player2.symbol);
