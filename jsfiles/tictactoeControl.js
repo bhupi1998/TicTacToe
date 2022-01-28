@@ -11,6 +11,7 @@ let player2=Player('Player2','O');//maximizer
 let clickIndex=0;
 let gameData = [-1,-1,-1,-1,-1,-1,-1,-1,-1]; //array is initially filled with -1 to prevent errors ['X', 'O', 'X', 'X', 'O', 'O', -1, -1, -1];//
 var round=0;
+let aiSelect=1; //if 1 user will fight against ai, if 0 user can fight against human.
 
 
 const gridDiv= document.querySelector('#grid');
@@ -25,6 +26,8 @@ const winnerPopUp=document.querySelector('#winnerPopUp')
 const gameResetPopUp=document.querySelector('#restartGamePopUp');
 const gameResetExternal=document.querySelector('#restartGameExternal');
 const overLay=document.querySelector('.overlayDiv');
+const humanAiSelect=document.querySelector('#humanMode');
+const player2EntryWindow=document.querySelector('#player2Entry');
 
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
@@ -96,6 +99,8 @@ const ticTacToe=(()=>{
             nodeQ.innerHTML='';
             round=0;
         }
+        player2EntryWindow.style.display='none';
+        aiSelect=0;
     }
     const gameEnd=(winner)=>{
         gameReset();
@@ -177,7 +182,7 @@ gridDiv.addEventListener('click',function(e){
     //call function gameControl
     let matchOutcome=ticTacToe.gameControl(player1,player2,clickIndex); //function returns +10,-10 or 0 if game is over '-' other wise
     //used for ai system
-    if(round%2!=0 && matchOutcome =='-'){
+    if(round%2!=0 && matchOutcome =='-' && aiSelect==1){
        let bestMove= aiFighter.findBestMove(gameData,player2.symbol);
        ticTacToe.gameControl(player1,player2,bestMove);
     }
@@ -201,3 +206,8 @@ popUpSubmit.addEventListener('click',function(){
     popUpWindow.style.display='none';
     overLay.style.zIndex='-2';
 });
+
+humanAiSelect.addEventListener('click', function(){
+    player2EntryWindow.style.display='block';
+    aiSelect=0;
+})
