@@ -21,7 +21,7 @@ const aiFighter = (()=>{
             if(board[i]==-1){ //means position is empty 
                 board[i]=symbol;
                 let score=miniMax(board,0,true);//!this should be true. Ai is the minimizer, A position has been chosen by it, it is maximizer's turn
-                console.log(score);
+                console.log(i,score);
                 if(score<bestScore){
                     bestScore=score;
                     bestMove=i;
@@ -56,7 +56,7 @@ function miniMax(board, depth, isMaximizingPlayer){
         let bestVal=-Infinity;
         for(let i=0;i<board.length;i++){
             if(board[i]==-1){
-                board[i]=player2.symbol;
+                board[i]=player1.symbol;
                 let value=miniMax(board,depth,false);
                 board[i]=-1;
                 bestVal=Math.max(bestVal,value);
@@ -68,7 +68,7 @@ function miniMax(board, depth, isMaximizingPlayer){
         let bestVal=Infinity;
         for(let i=0;i<board.length;i++){
             if(board[i]==-1){
-                board[i]=player1.symbol;
+                board[i]=player2.symbol;
                 let value=miniMax(board,depth,true);
                 board[i]=-1;
                 bestVal=Math.min(bestVal,value);
@@ -77,3 +77,4 @@ function miniMax(board, depth, isMaximizingPlayer){
         return bestVal        
     }
 }
+// aiFighter.findBestMove(gameData,player2.symbol);
