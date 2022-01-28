@@ -99,14 +99,14 @@ const ticTacToe=(()=>{
             nodeQ.innerHTML='';
             round=0;
         }
-        player2EntryWindow.style.display='none';
-        aiSelect=0;
     }
     const gameEnd=(winner)=>{
         gameReset();
         winnerPopUp.style.display="flex";
         overLay.style.zIndex='2';
         winnerPopUp.querySelector('.playerWinner').innerHTML=`${winner.name}`;
+        player2EntryWindow.style.display='none';
+        aiSelect=1;
     }
     const updateScore=(player1,player2,gameOutcome)=>{
         if(gameOutcome === player1.symbol){
@@ -208,6 +208,11 @@ popUpSubmit.addEventListener('click',function(){
 });
 
 humanAiSelect.addEventListener('click', function(){
+    if(aiSelect==1){
     player2EntryWindow.style.display='block';
-    aiSelect=0;
+    aiSelect=0; 
+    }else{
+        player2EntryWindow.style.display='none';
+        aiSelect=1; 
+    }
 })
