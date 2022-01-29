@@ -6,6 +6,7 @@
         //                          1 if spot is taken
         //                          - default. game can carry on
 const aiFighter = (()=>{
+    let depth=0;
     const randomMove = () =>{
         let randomNumber=-2;
         let matchOutcome;
@@ -19,9 +20,10 @@ const aiFighter = (()=>{
         let bestScore=Infinity;
         for(let i=0;i<board.length;i++){
             if(board[i]==-1){ //means position is empty 
-                board[i]=symbol;
-                let score=miniMax(board,0,true);//!this should be true. Ai is the minimizer, A position has been chosen by it, it is maximizer's turn
-                if(score<bestScore){
+                board[i]=symbol;//minimizer O makes a move
+                let score=miniMax(board,depth+1,true);//!this should be true. Ai is the minimizer, A position has been chosen by it, it is maximizer's turn
+                //that moves score is returned and compared
+                if(score<bestScore){ //since it's minimizer, we are looking for the smallest value
                     bestScore=score;
                     bestMove=i;
                 }
@@ -39,39 +41,39 @@ const aiFighter = (()=>{
             let toReturn;
             switch(gameStatus){
                 case player1.symbol:
-                    toReturn=10;
+                    toReturn=10-depth; //Accounting for depth allows the algo to make decisions that will lead to the fastest win
                     break;
                 case player2.symbol:
-                    toReturn=-10;
+                    toReturn=-10+depth;
                     break;
                 case 0:
                     toReturn=0;
             } 
             return toReturn;//+10 for p1, -10 for p2
         }
-        if(isMaximizingPlayer){
+        if(isMaximizingPlayer){ //X
             let bestVal=-Infinity;
             for(let i=0;i<board.length;i++){
                 if(board[i]==-1){
                     board[i]=player1.symbol;
-                    let value=miniMax(board,depth,false);
+                    let value=miniMax(board,depth+1,false); //X has made a move. Time for minimizer
                     board[i]=-1;
                     bestVal=Math.max(bestVal,value);
                 }
             }
-            return bestVal
+            return bestVal;
         }
         else{
             let bestVal=Infinity;
             for(let i=0;i<board.length;i++){
                 if(board[i]==-1){
                     board[i]=player2.symbol;
-                    let value=miniMax(board,depth,true);
+                    let value=miniMax(board,depth+1,true);
                     board[i]=-1;
                     bestVal=Math.min(bestVal,value);
                 }
             }
-            return bestVal        
+            return bestVal;        
         }
     }
 
