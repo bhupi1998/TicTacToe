@@ -187,3 +187,27 @@ body{
 #player2Entry{
     display: none;
 }
+
+@media only screen and (max-width: 400px) {
+    #grid{
+        display:grid;
+        width: 300px;
+        height:300px;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
+        color: #f4ac45;
+    }
+    
+    .quadrants{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
+    }
+    .users{
+        display: flex;
+        flex-direction:row;
+        gap:70px;
+        color:#e9190f;
+    }
+}
