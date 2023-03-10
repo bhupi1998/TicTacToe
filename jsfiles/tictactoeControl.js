@@ -29,6 +29,7 @@ const overLay=document.querySelector('.overlayDiv');
 const humanAiSelect=document.querySelector('#humanMode');
 const player2EntryWindow=document.querySelector('#player2Entry');
 
+
 //trying to use modules to store all functions. This allows to keep the namespace clear.
 const ticTacToe=(()=>{
     let boxNumber=0;
@@ -175,7 +176,8 @@ function resetPopUp(){ //when user presses a reset button the event listener cal
 
 //event listeners
 gridDiv.addEventListener('click',function(e){
-    let clickId=e.path[0].id;
+    console.log(e);
+    let clickId=e.srcElement.id;
     if(clickId == 'grid') return; //if the grid element is clicked on ignore. 
     
     clickIndex=Number(clickId.slice(3))-1; //! need to offset by 1. Should have indexed grid by 0
